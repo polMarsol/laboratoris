@@ -9,6 +9,11 @@
 
 - He desenvolupat un script per al control de memòria a la màquina virtual, que em permet monitoritzar i gestionar l'ús de memòria de manera més efectiva, és un script de consulta que et diu la memòria utilitzada, que quan es supera el 90% envia un missatge d'alarma.
 
+
+### Script de Còpia de Seguretat
+
+- He creat un script que et permet fer una còpia de seguretat en el teu ordinador.
+
 ### Configuració d'Entorns
 
 - **Entorn amb Debian**: He configurat un entorn basat en Debian, ajustant totes les configuracions necessàries per als meus projectes.
