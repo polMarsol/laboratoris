@@ -44,7 +44,7 @@ Per exemple, transformeu el fitxer `pokemon.csv` en un fitxer amb els camps sepa
 
 ```bash
 awk -F, \
-BEGIN{OFS=";";}
+'BEGIN{OFS=";";}
 {  
 for (i=1;i<=NF;i++)  
     printf("%s%s",$i,(i==NF)?"\n":OFS)
