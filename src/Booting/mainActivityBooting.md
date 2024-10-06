@@ -45,3 +45,55 @@ Són els registres (log) de connexió de l'usuari al sistema mitjançant SSH.
 
 ![alt text](image-4.png)
 Com es pot veure a continuació, per poder executar, parar o reiniciar el servei ssh cal tenir permissos d'administrador i també es pot veure a ACTIVE: inactive, que el servei està en STOP.
+
+
+
+
+# Disseny d'un Escenari Real per a un Script d'Arrancada
+
+## Descripció de l'Escenari
+
+Es dissenyarà un script d'arrancada que s'encarregarà d'iniciar una màquina virtual de VMware automàticament quan un usuari inicia sessió en un terminal. Això facilita la feina diària, ja que l'usuari no ha de recordar fer-ho manualment cada vegada que inicia sessió.
+
+### Tasca a Realitzar
+
+L'objectiu del script és iniciar una màquina virtual que conté un servidor web que ha de ser accessible per a diversos usuaris. Un cop la màquina virtual estigui en funcionament, l'usuari podrà connectar-se a ella mitjançant SSH per gestionar el servidor.
+
+## Contingut del Script d'Arrancada
+
+```powershell
+# Ruta al fitxer .vmx de la màquina virtual
+$vmxPath = "C:\Users\Pol Marsol\OneDrive\Documentos\Virtual Machines\D - Prova 4.2.2\D - Prova 4.2.2.vmx"
+
+# Ruta al fitxer executables vmrun
+$vmrunPath = "C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe"
+
+# Comprovem si vmrun existeix
+if (-Not (Test-Path $vmrunPath)) {
+    Write-Output "El fitxer vmrun no s'ha trobat. Comprova la ruta."
+    exit 1
+}
+
+# Arrenquem la màquina virtual
+Start-Process -FilePath $vmrunPath -ArgumentList "start", $vmxPath, "nogui" -NoNewWindow -Wait
+
+# Comprovem l'estat de sortida
+if ($LASTEXITCODE -eq 0) {
+    Write-Output "La màquina virtual s'ha iniciat correctament."
+    
+    Start-Sleep -Seconds 2 # Esperem que la VM estigui llesta
+    
+    # Connexió a la VM mitjançant SSH
+    ssh pol@192.168.210.138
+} else {
+    Write-Output "Error al iniciar la màquina virtual."
+}
+```
+
+Has de desar aquest fitxer example.ps1 a C:/Home/User, 
+C:\Users\Pol Marsol\OneDrive\Documentos\WindowsPowerShell i obrir el fitxer: Microsoft.PowerShell_profile
+i adjuntar-li aquesta comanda: & "C:\Users\Pol Marsol\iniciar_vm.ps1"
+i guardar els canvis.
+
+
+![alt text](image-5.png)
