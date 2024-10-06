@@ -44,7 +44,7 @@ Per exemple, transformeu el fitxer `pokemon.csv` en un fitxer amb els camps sepa
 
 ```bash
 awk -F, \
-BEGIN{OFS=";";}
+'BEGIN{OFS=";";}
 {  
 for (i=1;i<=NF;i++)  
     printf("%s%s",$i,(i==NF)?"\n":OFS)
@@ -151,7 +151,7 @@ END {
 Els arrays en **AWK** són associatius, és a dir, no cal indicar la posició de l'element en l'array. Per exemple, si volem comptar el nombre de pokemons de cada tipus per generació:
 
 ```bash
-awk -F, '
+gawk -F, '
 {
     if (NR > 1) {
         type1 = $3
@@ -171,6 +171,33 @@ END {
         }
     }
 }' pokemon.csv
+```
+
+> **Nota**: En aquest exemple, hem fet servir un array bidimensional. El llenguatge `awk` no permet declarar arrays multidimensionals, per poder fer-lo servir necessitem la extensió **gawk**. Per instal·lar-la, podeu fer servir la comanda `apt install gawk` o `dnf install gawk`.
+
+Per fer-ho en **AWK**, podem utiltizar una clau combinada amb el tipus i la generació i la funció **split** per separar les dues claus:
+
+```bash
+awk -F, '
+{
+    if (NR > 1) {
+        type1 = $3
+        type2 = $4
+        gen = $12
+        types[type1 " " gen]++
+        if (type2 != "") {
+            types[type2 " " gen]++
+        }
+    }
+}
+END {
+    for (typegen in types) {
+        split(typegen, temp, " ")
+        type = temp[1]
+        gen = temp[2]
+        printf "%s %d: %d\n", type, gen, types[typegen]
+    }
+}' pokemon.csv | sort -k2 -n
 ```
 
 ## Exercicis Avançats AWK

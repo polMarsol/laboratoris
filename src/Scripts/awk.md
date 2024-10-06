@@ -14,7 +14,7 @@
 
 **AWK** és un llenguatge de programació potent i versàtil, dissenyat específicament per a l’anàlisi de patrons i el processament de text. La seva funció principal és processar fitxers de text de manera eficient, permetent la transformació de dades, la generació d’informes i la filtració de dades.
 
-Pràcticament tots els sistemes Unix disposen d’una implementació d’AWK. Això inclou sistemes operatius com GNU/Linux, macOS, BSD, Solaris, AIX, HP-UX, entre d’altres. Per verificar si tens AWK instal·lat al teu sistema, pots utilitzar la comanda`awk --version`.
+Pràcticament tots els sistemes Unix disposen d’una implementació d’AWK. Això inclou sistemes operatius com GNU/Linux, macOS, BSD, Solaris, AIX, HP-UX, entre d’altres. Per consultar el manual d’AWK, pots utilitzar la comanda `man awk`. Per consultar la versió d’AWK instal·lada al teu sistema, pots utilitzar la comanda `awk -W version`.
 
 **AWK** es caracteritza per ser compacte, ràpid i senzill, amb un llenguatge d’entrada net i comprensible que recorda al llenguatge de programació C. Disposa de construccions de programació robustes que inclouen `if/else, while, do/while`, entre d’altres. L’eina AWK processa una llista de fitxers com a arguments. En cas de no proporcionar fitxers, AWK llegeix de l’entrada estàndard, permetent així la seva combinació amb *pipes* per a operacions més complexes.
 
